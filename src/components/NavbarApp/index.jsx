@@ -61,7 +61,7 @@ const NavbarApp = ({ theme }) => {
               {categoriesList.map((category) => (
                 <Link
                   key={category._id}
-                  to={`/categories/${category.name}`}
+                  to={`/products/category/${category.name}`}
                   state={{ categoryId: category._id }}
                   className="dropdown-item"
                 >

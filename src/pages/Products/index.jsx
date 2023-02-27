@@ -1,14 +1,21 @@
 import React from 'react'
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Products({ products }) {
-    const location = useLocation()
-    console.log(location)
+  let { state } = useLocation()
+  const productsList = state
+    ? products.filter((product) => product.categoryId === state.categoryId)
+    : products
+
   return (
     <div>
-        <p>Products</p>
-        <Link to="/products/services"> Services </Link>
-        <Outlet />
+      <ul>
+        {productsList.map((product) => (
+          <li key={product._id}>
+            <Link to={`/products/${product._id}`}>{product.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
