@@ -107,7 +107,7 @@ const Home = () => {
                 <HomeMiddle>
                     <HomeMiddleListContainer>
 						<HomeMiddleH2>Derniers articles</HomeMiddleH2>
-						<div style={{'text-align': 'center'}}>Ici on remplacera ce bloc par un composant Liste</div>
+						<div style={{'textAlign': 'center'}}>Ici on remplacera ce bloc par un composant Liste</div>
                     </HomeMiddleListContainer>
                 </HomeMiddle>
             </HomeWraper>

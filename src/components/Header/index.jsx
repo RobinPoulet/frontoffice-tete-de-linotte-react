@@ -3,7 +3,7 @@ import NavbarApp from '../NavbarApp'
 
 const Header = () => {
   return (
-    <NavbarApp />
+    <NavbarApp theme="light"/>
   )
 }
 

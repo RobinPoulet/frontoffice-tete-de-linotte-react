@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 
-export default function Products() {
+export default function Products({ products }) {
     const location = useLocation()
     console.log(location)
   return (
