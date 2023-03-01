@@ -7,7 +7,7 @@ const CardProduct = ({ product }) => {
   const { avatarUrl, description, name } = product
 
   return (
-    <Card>
+    <Card bg="light" text="dark" style={{ width: '18rem' }} className="mb-2">
       <Card.Img variant="top" src={avatarUrl} className="w-50" />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
