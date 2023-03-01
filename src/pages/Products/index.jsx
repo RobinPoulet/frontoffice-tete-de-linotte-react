@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import Card from '../../components/Card'
 
 export default function Products({ products }) {
   let { state } = useLocation()
@@ -11,9 +12,7 @@ export default function Products({ products }) {
     <div>
       <ul>
         {productsList.map((product) => (
-          <li key={product._id}>
-            <Link to={`/products/${product._id}`}>{product.name}</Link>
-          </li>
+          <Card key={product._id} product={product} />
         ))}
       </ul>
     </div>

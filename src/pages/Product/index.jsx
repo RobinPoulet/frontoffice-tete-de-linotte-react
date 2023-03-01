@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import { Loader } from '../../utils/style/Athoms'
-import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
+import SingleItem from '../../components/SingleItem'
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -57,14 +56,11 @@ export default function Product() {
   }
 
   return (
-    <Card>
-      <Card.Header>{category.name}</Card.Header>
-      <Card.Img variant="top" src={product.avatarUrl} className="w-25" />
-      <Card.Body>
-        <Card.Title>{product.name}</Card.Title>
-        <Card.Text>{product.description}</Card.Text>
-        <Button variant="primary">Ajouter au panier</Button>
-      </Card.Body>
-    </Card>
+    <SingleItem
+      name={category.name}
+      picture={product.avatarUrl}
+      description={product.description}
+      price={product.price}
+    />
   )
 }
