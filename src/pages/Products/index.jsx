@@ -12,6 +12,7 @@ const ProductsListWrapper = styled.div`
 
 export default function Products({ products }) {
   let { state } = useLocation()
+
   const productsList = state
     ? products.filter((product) => product.categoryId === state.categoryId)
     : products
@@ -20,7 +21,7 @@ export default function Products({ products }) {
   const productRows = [] // tableau de sous-tableaux de 3 produits chacun
 
   for (let i = 0; i < rows; i++) {
-    productRows.push(products.slice(i * 3, i * 3 + 3))
+    productRows.push(productsList.slice(i * 3, i * 3 + 3))
   }
 
   return (

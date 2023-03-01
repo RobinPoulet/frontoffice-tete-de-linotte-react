@@ -55,12 +55,5 @@ export default function Product() {
     )
   }
 
-  return (
-    <SingleItem
-      name={category.name}
-      picture={product.avatarUrl}
-      description={product.description}
-      price={product.price}
-    />
-  )
+  return <SingleItem product={product} />
 }
