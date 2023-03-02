@@ -10,6 +10,13 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
+const CenteredWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+`
+
 export default function Product() {
   const { productId } = useParams()
   const {
@@ -55,5 +62,9 @@ export default function Product() {
     )
   }
 
-  return <SingleItem product={product} />
+  return (
+    <CenteredWrapper>
+      <SingleItem product={product} />
+    </CenteredWrapper>
+  )
 }
