@@ -62,9 +62,5 @@ export default function Product() {
     )
   }
 
-  return (
-    <CenteredWrapper>
-      <SingleItem product={product} />
-    </CenteredWrapper>
-  )
+  return <SingleItem product={product} />
 }
