@@ -10,13 +10,6 @@ const LoaderWrapper = styled.div`
   justify-content: center;
 `
 
-const CenteredWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-`
-
 export default function Product() {
   const { productId } = useParams()
   const {
@@ -49,6 +42,7 @@ export default function Product() {
 
   const { product } = productData || {}
   const { category } = dataCategory || {}
+  const categoryName = category?.name
 
   if (errorProduct || errorCategory) {
     return <span>Il y a un problème avec l'API</span>
@@ -62,5 +56,5 @@ export default function Product() {
     )
   }
 
-  return <SingleItem product={product} />
+  return <SingleItem product={product} categoryName={categoryName} />
 }

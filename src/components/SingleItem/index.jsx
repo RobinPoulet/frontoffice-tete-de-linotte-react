@@ -1,7 +1,6 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const SingleItem = ({ product }) => {
+const SingleItem = ({ product, categoryName }) => {
   const { avatarUrl, description, name, inStock, price } = product
   return (
     <div className="container mt-5 py-4 px-xl-5">
@@ -19,8 +18,8 @@ const SingleItem = ({ product }) => {
         </div>
         <div className="col-lg-5">
           <div className="d-flex flex-column h-100">
-            <h2 className="mb-1">Nillkin iPhone X cover</h2>
-            <h4 className="text-muted mb-4">10000 Ks</h4>
+            <h2 className="mb-1">{name}</h2>
+            <h4 className="text-muted mb-4">{price} €</h4>
 
             <div className="row g-3 mb-4">
               <div className="col">
@@ -36,11 +35,8 @@ const SingleItem = ({ product }) => {
             <h4 className="mb-0">Details</h4>
             <hr />
             <dl className="row">
-              <dt className="col-sm-4">Code</dt>
-              <dd className="col-sm-8 mb-3">C0001</dd>
-
               <dt className="col-sm-4">Category</dt>
-              <dd className="col-sm-8 mb-3">Cases & Covers</dd>
+              <dd className="col-sm-8 mb-3">{categoryName}</dd>
               <dd className="col-sm-8 mb-3">
                 {inStock ? (
                   <div className="badge bg-success">In stock</div>
