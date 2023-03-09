@@ -9,7 +9,7 @@ const CardProduct = ({ product }) => {
 
   return (
     <div className="col">
-      <div className="card shadow-sm">
+      <div className="card shadow-sm h-100 w-75">
         <Link to={`/products/${_id}`}>
           {inStock ? (
             <div
