@@ -6,8 +6,11 @@ import CardProduct from '../../components/CardProduct'
 import styled from 'styled-components'
 
 const ProductsListWrapper = styled.div`
-  margin: 4%;
-  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 `
 
 const CardProductWrapper = styled.div`
