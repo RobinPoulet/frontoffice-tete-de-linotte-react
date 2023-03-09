@@ -1,4 +1,5 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const SingleItem = ({ product, categoryName }) => {
   const { avatarUrl, description, name, inStock, price } = product
@@ -21,14 +22,25 @@ const SingleItem = ({ product, categoryName }) => {
             <h2 className="mb-1">{name}</h2>
             <h4 className="text-muted mb-4">{price} €</h4>
 
+            <p className="mb-1">
+              {inStock ? (
+                <span className="badge bg-success ml-2 mb-1 mt-2">
+                  Disponible
+                </span>
+              ) : (
+                <span className="badge bg-danger ml-2 mb-1 mt-2">
+                  Plus disponible
+                </span>
+              )}
+            </p>
             <div className="row g-3 mb-4">
               <div className="col">
-                <button className="btn btn-outline-dark py-2 w-100">
-                  Add to cart
+                <button
+                  className="btn btn-outline-dark mt-3"
+                  disabled={!inStock}
+                >
+                  <FontAwesomeIcon icon={['fas', 'cart-plus']} /> Add to cart
                 </button>
-              </div>
-              <div className="col">
-                <button className="btn btn-dark py-2 w-100">Buy now</button>
               </div>
             </div>
 
@@ -37,13 +49,7 @@ const SingleItem = ({ product, categoryName }) => {
             <dl className="row">
               <dt className="col-sm-4">Category</dt>
               <dd className="col-sm-8 mb-3">{categoryName}</dd>
-              <dd className="col-sm-8 mb-3">
-                {inStock ? (
-                  <div className="badge bg-success">In stock</div>
-                ) : (
-                  <div className="badge bg-danger">Out of stock</div>
-                )}
-              </dd>
+              <dd className="col-sm-8 mb-3"></dd>
             </dl>
 
             <h4 className="mb-0">Description</h4>
