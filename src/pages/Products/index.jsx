@@ -1,30 +1,16 @@
 import React from 'react'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
-import ReactPaginate from 'react-paginate'
+import Paginate from '../../components/Paginate'
 import { useLocation } from 'react-router-dom'
 import CardProduct from '../../components/CardProduct'
-import styled from 'styled-components'
-
-const ProductsListWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-gap: 20px;
-  grid-auto-rows: 1fr;
-  align-content: start;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`
-
-const CardProductWrapper = styled.div`
-  height: 650px;
-`
 
 const Products = ({ products }) => {
   let { state } = useLocation()
-  const [currentPage, setCurrentPage] = React.useState(0)
+  const [currentPage, setCurrentPage] = React.useState(1)
   const viewType = { grid: true, list: false }
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber)
+  }
 
   const productsList = state
     ? products.filter((product) => product.categoryId === state.categoryId)
@@ -35,13 +21,9 @@ const Products = ({ products }) => {
   const endIndex = startIndex + itemsPerPage
   const productsToDisplay = productsList.slice(startIndex, endIndex)
 
-  function handlePageClick({ selected }) {
-    setCurrentPage(selected)
-  }
-
   return (
     <div className="row mb-4 mt-lg-3 mt-3">
-      <h2>Prodcuts List</h2>
+      <h2 className="text-center">Nos produits</h2>
       <div className="d-none d-lg-block col-lg-3">
         <div className="border rounded shadow-sm"></div>
       </div>
@@ -58,13 +40,10 @@ const Products = ({ products }) => {
                 <CardProduct key={productIndex} product={product} />
               ))}
 
-              <ReactPaginate
-                pageCount={Math.ceil(products.length / itemsPerPage)}
-                marginPagesDisplayed={2}
-                pageRangeDisplayed={5}
-                onPageChange={handlePageClick}
-                containerClassName="pagination"
-                activeClassName="active"
+              <Paginate
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+                totalPages={Math.ceil(productsList.length / itemsPerPage)}
               />
             </div>
           </div>
