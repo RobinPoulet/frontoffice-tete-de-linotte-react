@@ -46,13 +46,13 @@ const CardProduct = ({ product }) => {
                   className="btn btn-outline-dark mt-3"
                   disabled={!inStock}
                 >
-                  <FontAwesomeIcon icon={['fas', 'cart-plus']} /> Add to cart
+                  <FontAwesomeIcon icon={['fas', 'cart-plus']} />
                 </button>
               </div>
               <div className="col-6">
                 <Link to={`/products/${_id}`}>
                   <button className="btn btn-outline-secondary mt-3">
-                    <FontAwesomeIcon icon={['fas', 'eye']} /> Détails produit
+                    <FontAwesomeIcon icon={['fas', 'eye']} />
                   </button>
                 </Link>
               </div>

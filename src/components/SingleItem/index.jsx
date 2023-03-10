@@ -21,7 +21,6 @@ const SingleItem = ({ product, categoryName }) => {
           <div className="d-flex flex-column h-100">
             <h2 className="mb-1">{name}</h2>
             <h4 className="text-muted mb-4">{price} €</h4>
-
             <p className="mb-1">
               {inStock ? (
                 <span className="badge bg-success ml-2 mb-1 mt-2">

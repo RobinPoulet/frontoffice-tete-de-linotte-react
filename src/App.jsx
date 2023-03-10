@@ -1,6 +1,5 @@
 import React from 'react'
 import Home from './pages/Home'
-import Template from './Template'
 import Products from './pages/Products'
 import Product from './pages/Product'
 import About from './pages/About'
@@ -8,6 +7,8 @@ import { Routes, Route } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import { Loader } from './utils/style/Athoms'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -38,7 +39,8 @@ const App = () => {
   }
 
   return (
-    <Template>
+    <div>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
@@ -52,7 +54,8 @@ const App = () => {
         />
         <Route path="/about" element={<About />} />
       </Routes>
-    </Template>
+      <Footer />
+    </div>
   )
 }
 

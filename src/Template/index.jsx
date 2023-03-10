@@ -6,7 +6,9 @@ function Template(props) {
   return (
     <>
       <Header />
-      <Content>{props.children}</Content>
+      <Content>
+        <div className="container d-flex my-content">{props.children}</div>
+      </Content>
       <Footer />
     </>
   )
