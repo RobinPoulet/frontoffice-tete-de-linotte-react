@@ -1,10 +1,17 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useQuery } from 'react-query'
+import { Loader } from '../../utils/style/Athoms'
+import styled from 'styled-components'
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+`
 
 const Header = () => {
-  const [openedDrawer, setOpenedDrawer] = useState(false)
+  const [openedDrawer, setOpenedDrawer] = React.useState(false)
 
   function toggleDrawer() {
     setOpenedDrawer(!openedDrawer)
@@ -14,6 +21,29 @@ const Header = () => {
     if (openedDrawer) {
       setOpenedDrawer(false)
     }
+  }
+
+  const { isLoading, error, data } = useQuery('categories', async () => {
+    const response = await fetch(
+      'https://api-tdl-backend.herokuapp.com/api/category'
+    )
+    const data = await response.json()
+    console.log(data)
+    return data
+  })
+
+  const categoriesList = data?.categories
+
+  if (error) {
+    return <span>Il y a un problème avec l'API</span>
+  }
+
+  if (isLoading) {
+    return (
+      <LoaderWrapper>
+        <Loader data-testid="loader" />
+      </LoaderWrapper>
+    )
   }
 
   return (
@@ -26,7 +56,7 @@ const Header = () => {
               className="ms-1"
               size="lg"
             />
-            <span className="ms-2 h5">Shop</span>
+            <span className="ms-2 h5">Tête de Linotte</span>
           </Link>
 
           <div
@@ -36,6 +66,17 @@ const Header = () => {
             }
           >
             <ul className="navbar-nav me-auto mb-lg-0">
+              {categoriesList.map((category) => (
+                <li className="nav-item" key={category._id}>
+                  <Link
+                    to={`/products/category/${category.name}`}
+                    className="nav-link"
+                    state={{ categoryId: category._id }}
+                  >
+                    Explore
+                  </Link>
+                </li>
+              ))}
               <li className="nav-item">
                 <Link
                   to="/products"
