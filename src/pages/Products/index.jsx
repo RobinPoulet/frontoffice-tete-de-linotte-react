@@ -2,11 +2,19 @@ import React from 'react'
 import Paginate from '../../components/Paginate'
 import { useLocation } from 'react-router-dom'
 import CardProduct from '../../components/CardProduct'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const Products = ({ products }) => {
   let { state } = useLocation()
   const [currentPage, setCurrentPage] = React.useState(1)
-  const viewType = { grid: true, list: false }
+  const [viewType, setViewType] = React.useState({ grid: true })
+
+  function changeViewType() {
+    setViewType({
+      grid: !viewType.grid,
+    })
+  }
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -23,10 +31,24 @@ const Products = ({ products }) => {
 
   return (
     <div className="row mb-4 mt-lg-3 mt-3">
-      <h2 className="text-center">Nos produits</h2>
-      <div className="d-none d-lg-block col-lg-3">
-        <div className="border rounded shadow-sm"></div>
-      </div>
+      <Container fluid>
+        <Row>
+          <Col xs lg="10">
+            <h2 className="text-center">Nos produits</h2>
+          </Col>
+          <Col xs lg="2">
+            <button
+              className="btn btn-outline-dark ms-2 d-none d-lg-inline"
+              onClick={changeViewType}
+            >
+              <FontAwesomeIcon
+                icon={['fas', viewType.grid ? 'th-list' : 'th-large']}
+              />
+            </button>
+          </Col>
+        </Row>
+      </Container>
+      <div className="d-none d-lg-block col-lg-3"></div>
       <div className="col-lg-9">
         <div className="d-flex flex-column h-100">
           <div className="row mb-3">
