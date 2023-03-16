@@ -31,6 +31,20 @@ main {
   flex: 1;
 }
 
+.navbar-nav > li:not(:last-child) {
+  margin-right: 1rem;
+}
+
+/* changer la couleur de fond au survol */
+.navbar .dropdown-menu.show {
+  background-color: lightgray;
+}
+
+/* revenir à la couleur d'origine si le dropdown n'est pas survolé */
+.navbar .dropdown-menu:not(.show) {
+  background-color: #fff; /* ou la couleur d'arrière-plan que vous utilisez pour votre navbar */
+}
+
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
