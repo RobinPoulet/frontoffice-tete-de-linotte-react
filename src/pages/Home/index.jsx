@@ -3,6 +3,7 @@ import { StyledLink } from '../../utils/style/Athoms'
 import { useSelector } from 'react-redux'
 import { selectTheme } from '../../utils/selectors'
 import CarrousselProducts from '../../components/CarrousselProducts'
+import { Container } from 'react-bootstrap'
 
 const HomeWraper = styled.div`
   padding: 4%;
@@ -92,6 +93,14 @@ const HomeMiddleH2 = styled.h2`
 const HomeMiddleListContainer = styled.div`
   max-width: 1200px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const CarrousselContainer = styled(Container)`
+  display: flex;
+  align-items: center;
 `
 
 const Home = ({ carrousselProductsList }) => {
@@ -116,10 +125,14 @@ const Home = ({ carrousselProductsList }) => {
         </HomeContainer>
         <HomeMiddle>
           <HomeMiddleListContainer>
-            <HomeMiddleH2>Derniers articles</HomeMiddleH2>
-            <CarrousselProducts
-              carrousselProductsList={carrousselProductsList}
-            />
+            <Container>
+              <HomeMiddleH2>Derniers articles</HomeMiddleH2>
+            </Container>
+            <CarrousselContainer>
+              <CarrousselProducts
+                carrousselProductsList={carrousselProductsList}
+              />
+            </CarrousselContainer>
           </HomeMiddleListContainer>
         </HomeMiddle>
       </HomeWraper>

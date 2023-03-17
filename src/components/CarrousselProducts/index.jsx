@@ -4,7 +4,7 @@ import { Carousel } from 'react-bootstrap'
 const CarrousselProducts = ({ carrousselProductsList }) => {
   const dic = ['Fisrt', 'Second', 'Third']
   return (
-    <Carousel>
+    <Carousel style={{ width: '50%', height: '50%' }}>
       {carrousselProductsList.map((product, productIndex) => (
         <Carousel.Item key={product._id}>
           <img
@@ -12,9 +12,9 @@ const CarrousselProducts = ({ carrousselProductsList }) => {
             src={product.avatarUrl}
             alt={`${dic[productIndex]} slide`}
           />
-          <Carousel.Caption>
-            <h3>{product.name}</h3>
-            <p>{product.price} €</p>
+          <Carousel.Caption className="text-center">
+            <h3 className="text-center">{product.name}</h3>
+            <p className="text-center">{product.price} €</p>
           </Carousel.Caption>
         </Carousel.Item>
       ))}
