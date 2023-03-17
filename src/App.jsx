@@ -26,6 +26,8 @@ const App = () => {
 
   const productsList = data?.products
 
+  const carrousselProductsList = productsList?.slice(0, 3)
+
   if (error) {
     return <span>Il y a un problème avec l'API</span>
   }
@@ -42,7 +44,10 @@ const App = () => {
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home carrousselProductsList={carrousselProductsList} />}
+        />
         <Route
           path="/products"
           element={<Products products={productsList} />}

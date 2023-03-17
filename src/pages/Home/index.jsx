@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { StyledLink } from '../../utils/style/Athoms'
 import { useSelector } from 'react-redux'
 import { selectTheme } from '../../utils/selectors'
+import CarrousselProducts from '../../components/CarrousselProducts'
 
 const HomeWraper = styled.div`
   padding: 4%;
@@ -93,7 +94,7 @@ const HomeMiddleListContainer = styled.div`
   margin: auto;
 `
 
-const Home = () => {
+const Home = ({ carrousselProductsList }) => {
   const theme = useSelector(selectTheme)
 
   return (
@@ -116,9 +117,9 @@ const Home = () => {
         <HomeMiddle>
           <HomeMiddleListContainer>
             <HomeMiddleH2>Derniers articles</HomeMiddleH2>
-            <div style={{ textAlign: 'center' }}>
-              Ici on remplacera ce bloc par un composant Liste
-            </div>
+            <CarrousselProducts
+              carrousselProductsList={carrousselProductsList}
+            />
           </HomeMiddleListContainer>
         </HomeMiddle>
       </HomeWraper>
