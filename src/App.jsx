@@ -16,7 +16,11 @@ const LoaderWrapper = styled.div`
 `
 
 const App = () => {
-  const { isLoading, error, data } = useQuery('products', async () => {
+  const {
+    isLoading: isLoadingProducts,
+    error: errorProducts,
+    data: dataProducts,
+  } = useQuery('products', async () => {
     const response = await fetch(
       'https://api-tdl-backend.herokuapp.com/api/product'
     )
@@ -24,15 +28,29 @@ const App = () => {
     return data
   })
 
-  const productsList = data?.products
+  const productsList = dataProducts?.products
 
-  const carrousselProductsList = productsList?.slice(0, 3)
+  const carrousselProductsList = productsList?.slice(0, 5)
 
-  if (error) {
+  const {
+    isLoading: isLoadingCategories,
+    error: errorCategories,
+    data: dataCategories,
+  } = useQuery('categories', async () => {
+    const response = await fetch(
+      'https://api-tdl-backend.herokuapp.com/api/category'
+    )
+    const data = await response.json()
+    return data
+  })
+
+  const categoriesList = dataCategories?.categories
+
+  if (errorProducts || errorCategories) {
     return <span>Il y a un problème avec l'API</span>
   }
 
-  if (isLoading) {
+  if (isLoadingProducts || isLoadingCategories) {
     return (
       <LoaderWrapper>
         <Loader data-testid="loader" />
@@ -42,7 +60,7 @@ const App = () => {
 
   return (
     <div>
-      <Header />
+      <Header categoriesList={categoriesList} />
       <Routes>
         <Route
           path="/"

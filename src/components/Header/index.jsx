@@ -1,17 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
-import { useQuery } from 'react-query'
-import { Loader, StyledLink } from '../../utils/style/Athoms'
-import styled from 'styled-components'
+import { StyledLink } from '../../utils/style/Athoms'
 import { Nav, NavDropdown } from 'react-bootstrap'
 
-const LoaderWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const Header = () => {
+const Header = ({ categoriesList }) => {
   const [show, setShow] = React.useState(false)
 
   const handleMouseOver = () => {
@@ -20,29 +13,6 @@ const Header = () => {
 
   const handleMouseLeave = () => {
     setShow(false)
-  }
-
-  const { isLoading, error, data } = useQuery('categories', async () => {
-    const response = await fetch(
-      'https://api-tdl-backend.herokuapp.com/api/category'
-    )
-    const data = await response.json()
-    console.log(data)
-    return data
-  })
-
-  const categoriesList = data?.categories
-
-  if (error) {
-    return <span>Il y a un problème avec l'API</span>
-  }
-
-  if (isLoading) {
-    return (
-      <LoaderWrapper>
-        <Loader data-testid="loader" />
-      </LoaderWrapper>
-    )
   }
 
   return (
@@ -79,16 +49,17 @@ const Header = () => {
                 id="basic-nav-dropdown"
                 show={show}
               >
-                {categoriesList.map((category) => (
-                  <Link
-                    key={category._id}
-                    to={`/products/category/${category.name}`}
-                    state={{ categoryId: category._id }}
-                    className="dropdown-item"
-                  >
-                    {category.name}
-                  </Link>
-                ))}
+                {categoriesList &&
+                  categoriesList.map((category) => (
+                    <Link
+                      key={category._id}
+                      to={`/products/category/${category.name}`}
+                      state={{ categoryId: category._id }}
+                      className="dropdown-item"
+                    >
+                      {category.name}
+                    </Link>
+                  ))}
               </NavDropdown>
             </li>
           </ul>
