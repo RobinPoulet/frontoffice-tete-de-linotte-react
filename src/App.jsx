@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { Loader } from './utils/style/Athoms'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import axios from 'axios'
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -21,11 +22,10 @@ const App = () => {
     error: errorProducts,
     data: dataProducts,
   } = useQuery('products', async () => {
-    const response = await fetch(
+    const response = await axios.get(
       'https://api-tdl-backend.herokuapp.com/api/product'
     )
-    const data = await response.json()
-    return data
+    return response.data
   })
 
   const productsList = dataProducts?.products
@@ -37,11 +37,10 @@ const App = () => {
     error: errorCategories,
     data: dataCategories,
   } = useQuery('categories', async () => {
-    const response = await fetch(
+    const response = await axios.get(
       'https://api-tdl-backend.herokuapp.com/api/category'
     )
-    const data = await response.json()
-    return data
+    return response.data
   })
 
   const categoriesList = dataCategories?.categories
