@@ -9,7 +9,7 @@ const CarrousselProducts = ({ carrousselProductsList }) => {
         carrousselProductsList.map((product, productIndex) => (
           <Carousel.Item key={product._id}>
             <img
-              className="d-block w-100"
+              className="d-block w-100 carousel-image"
               src={product.avatarUrl}
               alt={`${dic[productIndex]} slide`}
             />

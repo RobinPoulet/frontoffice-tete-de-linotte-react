@@ -101,6 +101,7 @@ const HomeMiddleListContainer = styled.div`
 const CarrousselContainer = styled(Container)`
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 
 const Home = ({ carrousselProductsList }) => {

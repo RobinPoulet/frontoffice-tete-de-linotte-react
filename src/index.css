@@ -43,6 +43,14 @@ main {
   background-color: lightgray; /* remplacer "yourColor" par la couleur de survol souhaitée */
 }
 
+.carousel-image {
+  object-fit: contain;
+}
+
+.custom-carousel-item {
+  height: 50vh;
+}
+
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
