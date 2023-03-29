@@ -7,6 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 const Products = ({ products }) => {
   let { state } = useLocation()
+  console.log(state)
   const [currentPage, setCurrentPage] = React.useState(1)
   const [viewType, setViewType] = React.useState({ grid: true })
 
@@ -21,7 +22,11 @@ const Products = ({ products }) => {
   }
 
   const productsList = state
-    ? products.filter((product) => product.categoryId === state.categoryId)
+    ? products.filter((product) =>
+        product.categoryId === state.categoryId && state.childCategoryId
+          ? state.childCategoryId.includes(product.categoryId)
+          : true
+      )
     : products
 
   const itemsPerPage = 9

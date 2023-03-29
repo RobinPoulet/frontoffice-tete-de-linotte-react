@@ -34,6 +34,11 @@ const Header = ({ categoriesList }) => {
   const isCategoryParent = (categoryId) =>
     categoriesList.some((category) => category.categoryId === categoryId)
 
+  const getCategoryChildId = (categoryId) =>
+    categoriesList
+      .filter((category) => category.categoryId === categoryId)
+      .map((category) => category._id)
+
   return (
     <header>
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
@@ -64,7 +69,10 @@ const Header = ({ categoriesList }) => {
                     >
                       <Link
                         to={`/products/category/${category.name}`}
-                        state={{ categoryId: category._id }}
+                        state={{
+                          categoryId: category._id,
+                          childCategoryId: getCategoryChildId(category._id),
+                        }}
                         className="dropdown-item"
                       >
                         Voir tous les produits
