@@ -5,14 +5,21 @@ import { StyledLink } from '../../utils/style/Athoms'
 import { Nav, NavDropdown } from 'react-bootstrap'
 
 const Header = ({ categoriesList }) => {
-  const [show, setShow] = React.useState(false)
+  const [listState, setListState] = React.useState({})
 
-  const handleMouseOver = () => {
-    setShow(true)
+  const handleListState = (categoryId, value) => {
+    setListState((prevState) => ({
+      ...prevState,
+      [categoryId]: value,
+    }))
   }
 
-  const handleMouseLeave = () => {
-    setShow(false)
+  const handleMouseOver = (categoryId) => {
+    handleListState(categoryId, true)
+  }
+
+  const handleMouseLeave = (categoryId) => {
+    handleListState(categoryId, false)
   }
 
   const parentCategoriesList = categoriesList?.filter(
@@ -46,14 +53,14 @@ const Header = ({ categoriesList }) => {
                 isCategoryParent(category._id) ? (
                   <li
                     className="nav-item mt-1"
-                    onMouseOver={handleMouseOver}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseOver={() => handleMouseOver(category._id)}
+                    onMouseLeave={() => handleMouseLeave(category._id)}
                     key={category._id}
                   >
                     <NavDropdown
                       title={category.name}
                       id="basic-nav-dropdown"
-                      show={show}
+                      show={listState[category._id]}
                     >
                       <Link
                         to={`/products/category/${category.name}`}
