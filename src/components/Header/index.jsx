@@ -15,6 +15,18 @@ const Header = ({ categoriesList }) => {
     setShow(false)
   }
 
+  const parentCategoriesList = categoriesList?.filter(
+    (category) => !category.categoryId
+  )
+
+  const childCategoriesList = (parentCategoryId) =>
+    categoriesList.filter(
+      (category) => category.categoryId === parentCategoryId
+    )
+
+  const isCategoryParent = (categoryId) =>
+    categoriesList.some((category) => category.categoryId === categoryId)
+
   return (
     <header>
       <nav className="navbar fixed-top navbar-expand-lg navbar-light bg-white border-bottom">
@@ -29,39 +41,53 @@ const Header = ({ categoriesList }) => {
           </Link>
 
           <ul className="navbar-nav me-auto mb-lg-0">
-            <li className="nav-item">
-              <Nav.Link as={StyledLink} to="/">
-                Home
-              </Nav.Link>
-            </li>
-            <li className="nav-item">
-              <Nav.Link as={StyledLink} to="/about" eventKey="about">
-                A propos
-              </Nav.Link>
-            </li>
-            <li
-              className="nav-item mt-1"
-              onMouseOver={handleMouseOver}
-              onMouseLeave={handleMouseLeave}
-            >
-              <NavDropdown
-                title="Nos produits"
-                id="basic-nav-dropdown"
-                show={show}
-              >
-                {categoriesList &&
-                  categoriesList.map((category) => (
-                    <Link
-                      key={category._id}
+            {parentCategoriesList &&
+              parentCategoriesList.map((category) =>
+                isCategoryParent(category._id) ? (
+                  <li
+                    className="nav-item mt-1"
+                    onMouseOver={handleMouseOver}
+                    onMouseLeave={handleMouseLeave}
+                    key={category._id}
+                  >
+                    <NavDropdown
+                      title={category.name}
+                      id="basic-nav-dropdown"
+                      show={show}
+                    >
+                      <Link
+                        to={`/products/category/${category.name}`}
+                        state={{ categoryId: category._id }}
+                        className="dropdown-item"
+                      >
+                        Voir tous les produits
+                      </Link>
+                      {childCategoriesList(category._id).map(
+                        (childCategory) => (
+                          <Link
+                            key={childCategory._id}
+                            to={`/products/category/${childCategory.name}`}
+                            state={{ categoryId: childCategory._id }}
+                            className="dropdown-item"
+                          >
+                            {childCategory.name}
+                          </Link>
+                        )
+                      )}
+                    </NavDropdown>
+                  </li>
+                ) : (
+                  <li className="nav-item" key={category._id}>
+                    <Nav.Link
+                      as={StyledLink}
                       to={`/products/category/${category.name}`}
                       state={{ categoryId: category._id }}
-                      className="dropdown-item"
                     >
                       {category.name}
-                    </Link>
-                  ))}
-              </NavDropdown>
-            </li>
+                    </Nav.Link>
+                  </li>
+                )
+              )}
           </ul>
         </div>
       </nav>
