@@ -22,16 +22,16 @@ const Products = ({ products }) => {
   }
 
   const productsList = state
-    ? products.filter(
-        (product) =>
-          product.categoryId === state.categoryId &&
-          (state.childCategoryId
-            ? state.childCategoryId.includes(product.categoryId)
-            : true)
-      )
+    ? state.childCategoryId
+      ? products.filter(
+          (product) =>
+            product.categoryId === state.childCategoryId ||
+            state.childCategoryId.includes(product.categoryId)
+        )
+      : products.filter((product) => product.categoryId === state.categoryId)
     : products
 
-  console.log(state ? 'vrai' : 'faux', productsList)
+  console.log(productsList)
 
   const itemsPerPage = 9
   const startIndex = (currentPage - 1) * itemsPerPage
