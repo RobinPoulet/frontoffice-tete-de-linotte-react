@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Paginate from '../../components/Paginate'
 import { useLocation } from 'react-router-dom'
 import CardProduct from '../../components/CardProduct'
@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Container, Row, Col } from 'react-bootstrap'
 
 const Products = ({ products }) => {
-  let { state } = useLocation()
-  console.log(state)
+  const { state } = useLocation()
   const [currentPage, setCurrentPage] = React.useState(1)
   const [viewType, setViewType] = React.useState({ grid: true })
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [state])
 
   function changeViewType() {
     setViewType({
@@ -30,8 +33,6 @@ const Products = ({ products }) => {
         )
       : products.filter((product) => product.categoryId === state.categoryId)
     : products
-
-  console.log(productsList)
 
   const itemsPerPage = 9
   const startIndex = (currentPage - 1) * itemsPerPage

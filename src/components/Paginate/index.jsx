@@ -5,6 +5,7 @@ const Paginate = ({ currentPage, onPageChange, totalPages }) => {
   const handlePageClick = (page) => {
     onPageChange(page)
   }
+  console.log(currentPage, totalPages)
 
   const renderPageNumbers = () => {
     const pageNumbers = []
@@ -24,6 +25,7 @@ const Paginate = ({ currentPage, onPageChange, totalPages }) => {
         endPage = currentPage + 3
       }
     }
+    console.log(startPage, endPage)
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <Pagination.Item
@@ -36,6 +38,7 @@ const Paginate = ({ currentPage, onPageChange, totalPages }) => {
         </Pagination.Item>
       )
     }
+    console.log(pageNumbers, totalPages, currentPage)
     if (totalPages > 7) {
       if (currentPage > 4) {
         pageNumbers.unshift(

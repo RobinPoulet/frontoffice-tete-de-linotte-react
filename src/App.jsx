@@ -67,12 +67,16 @@ const App = () => {
         />
         <Route
           path="/products"
-          element={<Products products={productsList} />}
+          element={
+            <Products products={productsList} isStartPagination={true} />
+          }
         />
         <Route path="/products/:productId" element={<Product />} />
         <Route
           path="/products/category/:categoryName"
-          element={<Products products={productsList} />}
+          element={
+            <Products products={productsList} isStartPagination={true} />
+          }
         />
         <Route path="/about" element={<About />} />
       </Routes>
