@@ -9,6 +9,7 @@ const Products = ({ products }) => {
   const { state } = useLocation()
   const [currentPage, setCurrentPage] = React.useState(1)
   const [viewType, setViewType] = React.useState({ grid: true })
+  const [itemsPerPage, setItemsPerPage] = React.useState(9)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -18,7 +19,10 @@ const Products = ({ products }) => {
     setViewType({
       grid: !viewType.grid,
     })
+    setItemsPerPage(itemsPerPage === 9 ? 6 : 9)
   }
+
+  console.log(itemsPerPage)
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -34,10 +38,9 @@ const Products = ({ products }) => {
       : products.filter((product) => product.categoryId === state.categoryId)
     : products
 
-  const itemsPerPage = 9
   const startIndex = (currentPage - 1) * itemsPerPage
   const endIndex = startIndex + itemsPerPage - 1
-  const productsToDisplay = productsList.slice(startIndex, endIndex)
+  const productsToDisplay = productsList.slice(startIndex, endIndex + 1)
 
   return (
     <div className="row mb-4 mt-lg-3 mt-3">
@@ -71,14 +74,13 @@ const Products = ({ products }) => {
               {productsToDisplay.map((product, productIndex) => (
                 <CardProduct key={productIndex} product={product} />
               ))}
-
-              <Paginate
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-                totalPages={Math.ceil(productsList.length / itemsPerPage)}
-              />
             </div>
           </div>
+          <Paginate
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+            totalPages={Math.ceil(productsList.length / itemsPerPage)}
+          />
         </div>
       </div>
     </div>
